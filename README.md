@@ -4,18 +4,24 @@ This is the best game
 
 ## Installation
 
+We use [miniconda](https://conda.io/miniconda.html) to manage environments.
+
 ```bash
-npm install
+conda env create
 ```
 
 ## Develop
 
+Activate the environment using miniconda:
+
 ```bash
-npm start
+conda activate TheGame
 ```
 
-[http://localhost:8080](http://localhost:8080)
+## Run
 
-By default the webpack dev server runs on port 8080. If there's already something running on that port then check the console for the correct port.
+Do the thing!
 
-This project uses [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/)
+```bash
+python main.py
+```
