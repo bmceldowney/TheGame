@@ -1,25 +1,30 @@
-import sys, pygame
-pygame.init()
+import kivy
+from kivy.app import App
+from kivy.uix.widget import Widget
+import kivent_core
 
-size = width, height = 640, 480
-speed = [2, 2]
-black = 0, 0, 0
+class Game(Widget):
+    def __init__(self, **kwargs):
+        super(Game, self).__init__(**kwargs)
+        self.gameworld.init_gameworld([], callback=self.init_game)
 
-screen = pygame.display.set_mode(size)
+    def init_game(self):
+        self.setup_states()
+        self.set_state()
 
-ball = pygame.image.load("assets/intro_ball.gif")
-ballrect = ball.get_rect()
+    def setup_states(self):
+        self.gameworld.add_state(state_name='main', 
+            systems_added=[],
+            systems_removed=[], systems_paused=[],
+            systems_unpaused=[],
+            screenmanager_screen='main')
 
-while 1:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
-    
-    ballrect = ballrect.move(speed)
-    if ballrect.left < 0 or ballrect.right > width:
-        speed[0] = -speed[0]
-    if ballrect.top < 0 or ballrect.bottom > height:
-        speed[1] = -speed[1]
-    
-    screen.fill(black)
-    screen.blit(ball, ballrect)
-    pygame.display.flip()
+    def set_state(self):
+        self.gameworld.state = 'main'
+
+class TheGame(App):
+    def build(self):
+        pass
+
+if __name__ == '__main__':
+    TheGame().run()

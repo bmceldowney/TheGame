@@ -10,12 +10,16 @@ We use [miniconda](https://conda.io/miniconda.html) to manage environments.
 conda env create
 ```
 
-## Develop
-
 Activate the environment using miniconda:
 
 ```bash
 conda activate TheGame
+```
+
+Install [KivEnt](http://kivent.org/) (ensure this is done inside your virtual environment). I've only tested this on Mac, YMMV for other OSes.
+
+```bash
+./kivent-install.sh
 ```
 
 ## Run
