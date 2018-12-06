@@ -1,25 +1,34 @@
-import sys, pygame
-pygame.init()
+import pyxel
 
-size = width, height = 640, 480
-speed = [2, 2]
-black = 0, 0, 0
+class App:
+    def __init__(self):
+        pyxel.init(160, 120)
+        self.x = 0
+        self.y = pyxel.height / 2
+        self.vy = 8
+        pyxel.run(self.update, self.draw)
 
-screen = pygame.display.set_mode(size)
+    def update(self):
+        if pyxel.btn(pyxel.KEY_A):
+            self.x = (self.x - 1) % pyxel.width
+        if pyxel.btn(pyxel.KEY_D):
+            self.x = (self.x + 1) % pyxel.width
+        if pyxel.btn(pyxel.KEY_W):
+            self.y -= 1
+            self.vy = -8
 
-ball = pygame.image.load("assets/intro_ball.gif")
-ballrect = ball.get_rect()
+        if self.y < pyxel.height / 2:
+            self.y += self.vy
+        else:
+            self.y = pyxel.height / 2
 
-while 1:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
-    
-    ballrect = ballrect.move(speed)
-    if ballrect.left < 0 or ballrect.right > width:
-        speed[0] = -speed[0]
-    if ballrect.top < 0 or ballrect.bottom > height:
-        speed[1] = -speed[1]
-    
-    screen.fill(black)
-    screen.blit(ball, ballrect)
-    pygame.display.flip()
+        if self.vy <= 8:
+            self.vy += 1
+        print(self.vy)
+        print(self.y)
+
+    def draw(self):
+        pyxel.cls(0)
+        pyxel.rect(self.x, self.y, self.x + 7, self.y + 7, 9)
+
+App()
