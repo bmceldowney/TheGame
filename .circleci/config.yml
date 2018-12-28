@@ -28,6 +28,9 @@ jobs:
           - v1-dependencies-
 
       - run:
+          name: install build-essential
+          command: apt-get update && apt-get --assume-yes install build-essential
+      - run:
           name: install dependencies
           command: |
             conda env create

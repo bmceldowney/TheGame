@@ -3,5 +3,7 @@ name: TheGame
 dependencies:
   - python=3.7
   - pip
+  - pylint
   - pip:
-    - pygame
+    - pyxel
+    - pymunk
