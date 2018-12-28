@@ -1,4 +1,4 @@
-import pyxel
+import pyxel, pymunk
 
 class App:
     def __init__(self):
@@ -9,13 +9,17 @@ class App:
         pyxel.run(self.update, self.draw)
 
     def update(self):
+        ### Physics stuff
+        space = pymunk.Space()   
+        space.gravity = 0,-1000
+
         if pyxel.btn(pyxel.KEY_A):
             self.x = (self.x - 1) % pyxel.width
         if pyxel.btn(pyxel.KEY_D):
             self.x = (self.x + 1) % pyxel.width
         if pyxel.btn(pyxel.KEY_W):
             self.y -= 1
-            self.vy = -8
+            self.vy = -2
 
         if self.y < pyxel.height / 2:
             self.y += self.vy

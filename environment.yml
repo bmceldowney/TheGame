@@ -5,5 +5,5 @@ dependencies:
   - pip
   - pylint
   - pip:
-    - glfw==3.2.1
     - pyxel
+    - pymunk
